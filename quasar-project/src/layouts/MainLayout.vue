@@ -29,9 +29,9 @@
         "
       >
         <q-list padding>
-          <q-item to="/" exact clickable v-ripple>
+          <q-item to="/indexpage" exact clickable v-ripple>
             <q-item-section avatar>
-              <q-icon name="inbox" />
+              <q-icon name="home" />
             </q-item-section>
 
             <q-item-section> 首页 </q-item-section>
@@ -39,7 +39,7 @@
 
           <q-item to="/todolist" exact clickable v-ripple>
             <q-item-section avatar>
-              <q-icon name="Todo" />
+              <q-icon name="list" />
             </q-item-section>
 
             <q-item-section> 待办 </q-item-section>
@@ -65,12 +65,12 @@
 
       <q-img
         class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
+        src="/src/assets/backimage1.png"
         style="height: 150px"
       >
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            <img src="/src/assets/headphoto.png" />
           </q-avatar>
           <div class="text-weight-bold">小U</div>
           <div>@Lynneu</div>
@@ -79,9 +79,11 @@
     </q-drawer>
 
     <q-page-container>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </q-page-container>
   </q-layout>
 </template>
