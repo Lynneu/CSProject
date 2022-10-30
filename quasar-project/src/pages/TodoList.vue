@@ -1,25 +1,6 @@
 <template>
   <q-page class="column">
-    <div class="row q-pa-md">
-      <q-input
-        filled
-        bottom-slots
-        clearable
-        clear-icon="close"
-        v-model="newTask"
-        @keyup.enter="addTask"
-        dense
-        placeholder="添加待办事项"
-      >
-        <template v-slot:before>
-          <q-icon name="event" color="primary" />
-        </template>
-        <template v-slot:append>
-          <q-btn @click="addTask" round dense flat icon="add" />
-        </template>
-      </q-input>
-    </div>
-    <q-list class="bg-white" separator>
+    <q-list class="bg-white q-pa-md" separator style="padding-top: 66px">
       <q-item
         v-for="(task, index) in tasks"
         :key="task.title"
@@ -54,6 +35,28 @@
       <q-icon name="check" size="80px" color="primary" />
       <div class="text-h6 text-primary text-center">没有任务</div>
     </div>
+    <div class="row">
+      <q-page-sticky position="top-right" :offset="[18, 18]">
+        <q-input
+          bg-color="grey-2"
+          filled
+          bottom-slots
+          clearable
+          clear-icon="close"
+          v-model="newTask"
+          @keyup.enter="addTask"
+          dense
+          placeholder="添加待办事项"
+        >
+          <template v-slot:prepend>
+            <q-icon name="event" color="primary" />
+          </template>
+          <template v-slot:append>
+            <q-btn @click="addTask" round dense flat icon="add" />
+          </template>
+        </q-input>
+      </q-page-sticky>
+    </div>
   </q-page>
 </template>
 
@@ -67,6 +70,14 @@ export default {
         {
           title: '写数据结构课设',
           done: false,
+        },
+        {
+          title: 'Linux内存管理',
+          done: false,
+        },
+        {
+          title: '算法作业背包问题',
+          done: true,
         },
       ],
     };
@@ -103,5 +114,9 @@ export default {
 }
 .no-tasks {
   opacity: 0.5;
+}
+.TodoHead {
+  color: #3d72a6;
+  background-color: #ffffff;
 }
 </style>

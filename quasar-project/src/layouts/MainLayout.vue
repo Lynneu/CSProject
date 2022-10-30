@@ -1,7 +1,7 @@
 <template>
-  <div class="q-pa-auto">
-    <q-layout view="hHh Lpr lfr">
-      <q-header elevated class="bg-primary text-white q-electron-drag">
+  <div>
+    <q-layout view="hHh Lpr lff" class="bg-grey-1">
+      <q-header elevated class="bg-primary text-white q-electron-drag glossy">
         <q-toolbar>
           <q-btn
             flat
@@ -9,8 +9,12 @@
             round
             icon="menu"
             aria-label="Menu"
+            class="q-mr-sm"
             @click="lefDrawerOpen = !lefDrawerOpen"
           />
+          <q-avatar>
+            <img src="~assets\ToolHeadWhite.svg" />
+          </q-avatar>
           <q-toolbar-title> Mapu </q-toolbar-title>
 
           <q-space />
@@ -29,11 +33,9 @@
               <q-badge color="red" text-color="white" floating> 2 </q-badge>
               <q-tooltip>Notifications</q-tooltip>
             </q-btn>
-            <q-bar class="q-electron-drag bg-primary">
-              <q-btn dense flat icon="minimize" @click="minimize" />
-              <q-btn dense flat icon="crop_square" @click="toggleMaximize" />
-              <q-btn dense flat icon="close" @click="closeApp" />
-            </q-bar>
+            <q-btn dense flat icon="minimize" @click="minimize" />
+            <q-btn dense flat icon="crop_square" @click="toggleMaximize" />
+            <q-btn dense flat icon="close" @click="closeApp" />
           </div>
         </q-toolbar>
       </q-header>
@@ -44,11 +46,10 @@
         :mini="miniState"
         @mouseover="miniState = false"
         @mouseout="miniState = true"
-        mini-to-overlay
         :width="200"
         :breakpoint="500"
         bordered
-        class="bg-white"
+        class="bg-grey-2"
       >
         <q-list padding>
           <q-item to="/indexpage" exact clickable v-ripple>

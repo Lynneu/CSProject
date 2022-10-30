@@ -1,36 +1,37 @@
 <template>
   <q-page class="flex">
     <div>
-      <div class="row q-pa-sm">
-        <q-select
-          v-model="model"
-          class="z-max"
-          bg-color="white"
-          color="primary"
-          filled
-          use-input
-          use-chips
-          multiple
-          input-debounce="0"
-          @new-value="createValue"
-          :options="filterOptions"
-          @filter="filterFn"
-          style="width: 250px"
-          dense
-        >
-          <template v-slot:prepend>
-            <q-icon name="place" color="primary" />
-          </template>
-          <template v-if="model" v-slot:append>
-            <q-icon
-              name="cancel"
-              @click.stop.prevent="model = null"
-              class="cursor-pointer"
-            />
-          </template>
-        </q-select>
-      </div>
       <div id="container" class="absolute-full"></div>
+      <div class="row q-pa-sm">
+        <q-page-sticky position="top-right" :offset="[18, 18]">
+          <q-select
+            v-model="model"
+            bg-color="grey-3"
+            color="primary"
+            filled
+            use-input
+            use-chips
+            multiple
+            input-debounce="0"
+            @new-value="createValue"
+            :options="filterOptions"
+            @filter="filterFn"
+            style="width: 250px"
+            dense
+          >
+            <template v-slot:prepend>
+              <q-icon name="place" color="primary" />
+            </template>
+            <template v-if="model" v-slot:append>
+              <q-icon
+                name="cancel"
+                @click.stop.prevent="model = null"
+                class="cursor-pointer"
+              />
+            </template>
+          </q-select>
+        </q-page-sticky>
+      </div>
     </div>
   </q-page>
 </template>
@@ -153,7 +154,7 @@ export default {
 #container {
   width: 100%;
   height: 546px;
-  /* margin: 50px auto;*/
+
   /* border: 1px solid rgb(12, 88, 107);*/
 }
 </style>
