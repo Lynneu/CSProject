@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@electron/remote": "^2.0.8",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "pinia": "^2.0.11",

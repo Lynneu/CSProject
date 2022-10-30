@@ -1,17 +1,16 @@
 <template>
-  <q-page>
+  <q-page class="flex">
     <div>
-      <div class="row q-pa-sm bg-primary">
+      <div class="row q-pa-sm">
         <q-select
-          placeholder="选择您要前往的地点"
           v-model="model"
+          class="z-max"
+          bg-color="white"
+          color="primary"
+          filled
           use-input
           use-chips
           multiple
-          class="col"
-          square
-          filled
-          bg-color="white"
           input-debounce="0"
           @new-value="createValue"
           :options="filterOptions"
@@ -22,15 +21,23 @@
           <template v-slot:prepend>
             <q-icon name="place" color="primary" />
           </template>
+          <template v-if="model" v-slot:append>
+            <q-icon
+              name="cancel"
+              @click.stop.prevent="model = null"
+              class="cursor-pointer"
+            />
+          </template>
         </q-select>
       </div>
-      <div id="container"></div>
+      <div id="container" class="absolute-full"></div>
     </div>
   </q-page>
 </template>
 
 <script>
 import AMapLoader from '@amap/amap-jsapi-loader';
+import { shallowRef } from 'vue';
 import { ref } from 'vue';
 
 const stringOptions = [
@@ -81,9 +88,10 @@ const stringOptions = [
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'gaode',
-  data() {
+  setup() {
+    const map = shallowRef(null);
     return {
-      map: null, //初始化 map 对象
+      map,
     };
   },
   methods: {
@@ -111,35 +119,19 @@ export default {
     this.initMap();
   },
   setup() {
-    const model = ref(null);
     const filterOptions = ref(stringOptions);
 
     return {
-      model,
+      model: ref(null),
       filterOptions,
 
       createValue(val, done) {
-        if (val.length > 0) {
-          const modelValue = (model.value || []).slice();
-
-          val
-            .split(/[,;|]+/)
-            .map((v) => v.trim())
-            .filter((v) => v.length > 0)
-            .forEach((v) => {
-              if (stringOptions.includes(v) === false) {
-                stringOptions.push(v);
-              }
-              if (modelValue.includes(v) === false) {
-                modelValue.push(v);
-              }
-            });
-
-          done(null);
-          model.value = modelValue;
+        if (val.length > 2) {
+          if (!stringOptions.includes(val)) {
+            done(val, 'add-unique');
+          }
         }
       },
-
       filterFn(val, update) {
         update(() => {
           if (val === '') {
@@ -160,8 +152,8 @@ export default {
 <style>
 #container {
   width: 100%;
-  height: 500px;
+  height: 546px;
   /* margin: 50px auto;*/
-  border: 1px solid rgb(12, 88, 107);
+  /* border: 1px solid rgb(12, 88, 107);*/
 }
 </style>

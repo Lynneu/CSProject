@@ -1,24 +1,25 @@
 <template>
-  <q-page class="bg-grey-3 column">
-    <div class="row q-pa-sm bg-primary">
+  <q-page class="column">
+    <div class="row q-pa-md">
       <q-input
-        hide-bottom-space:
-        true
+        filled
+        bottom-slots
+        clearable
+        clear-icon="close"
         v-model="newTask"
         @keyup.enter="addTask"
-        class="col"
-        square
-        filled
-        bg-color="white"
-        placeholder="添加待办事项"
         dense
+        placeholder="添加待办事项"
       >
+        <template v-slot:before>
+          <q-icon name="event" color="primary" />
+        </template>
         <template v-slot:append>
           <q-btn @click="addTask" round dense flat icon="add" />
         </template>
       </q-input>
     </div>
-    <q-list class="bg-white" separator bordered>
+    <q-list class="bg-white" separator>
       <q-item
         v-for="(task, index) in tasks"
         :key="task.title"
