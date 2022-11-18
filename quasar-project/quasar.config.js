@@ -91,8 +91,25 @@ module.exports = configure(function (/* ctx */) {
     devServer: {
       // https: true
       open: true, // opens browser window automatically
-    },
+      proxy: {
 
+        // 将所有 '/api' 开头的请求进行代理
+        '/api': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+        /* 重写路径，请求的地址为 'http://127.0.0.1:8080/api/some/data' 时
+        实际上会从 'http://121.121.67.254:8185/some/data' 请求数据，即'^/api' 被替换为''，
+
+        而 'http://127.0.0.1:8080' 会被替换为target中的 'http://www.target.com:8000'
+        */
+        '^/api': '',
+        },
+      open: true, // opens browser window automatically
+    },
+    },
+  },
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {},

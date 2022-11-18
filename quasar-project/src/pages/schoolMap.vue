@@ -44,7 +44,7 @@
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from 'vue';
 import { ref } from 'vue';
-import axios from 'src/boot/axios';
+import qs from 'qs'
 
 const stringOptions = [
   '第三教学楼',
@@ -98,10 +98,13 @@ export default {
     const map = shallowRef(null);
     const filterOptions = ref(stringOptions);
 
+
     return {
       map,
       model: ref(null),
       filterOptions,
+     // distance,
+     // routelocation,
 
       createValue(val, done) {
         if (val.length > 2) {
@@ -150,30 +153,34 @@ export default {
         console.log(this.model[key] + '\n');
         arr.push(stringOptions.indexOf(this.model[key]));
       }
-      console.log(arr);
-      this.$axios
-        .post('http://localhost:5000/PostMap', arr)
-        .then(() => {
-          this.Getmap();
-          //this.result = rst.data;
+      console.log(arr[0]);
+        this.$axios
+        .post('http://10.27.112.2:5000/PostMap', {arr: arr})
+        .then((rst) => {
+          console.log(rst);
+          this.distance = rst.data.Distance;
+          this.routelocation = rst.data.Routelocation;
+          console.log(this.distance)
         })
         .catch((error) => {
           console.log(error);
-          this.Getmap();
+          //this.Getmap();
         });
     },
     Getmap() {
       this.$axios
-        .get('http://localhost:5000/PostMap')
+        .get('http://10.27.112.2:5000/PostMap')
         .then((rst) => {
           console.log(rst);
-          this.result = rst.data;
+          this.distance = rst.data.Distance;
+          this.routelocation = rst.data.Routelocation;
+          console.log(this.distance)
         })
         .catch((error) => {
           console.log(error);
         });
     },
-  },
+   },
   mounted() {
     //DOM初始化完成进行地图初始化
     this.initMap();
