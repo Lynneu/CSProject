@@ -1,5 +1,7 @@
 import itertools
+import pandas as pd
 import DataInit
+import simulated_annealing
 
 def held_karp(dists):
   n = len(dists)
@@ -9,12 +11,10 @@ def held_karp(dists):
 
   for subset_size in range(2, n):
     for subset in itertools.combinations(range(1, n), subset_size):
-      # Set bits for all nodes in this subset
       bits = 0
       for bit in subset:
         bits |= 1 << bit
 
-      # Find the lowest cost to get to this subset
       for k in subset:
         prev = bits & ~(1 << k)
 
@@ -25,16 +25,13 @@ def held_karp(dists):
           res.append((C[(prev, m)][0] + dists[m][k], m))
         C[(bits, k)] = min(res)
 
-    # We're interested in all bits but the least significant (the start state)
   bits = (2 ** n - 1) - 1
 
-  # Calculate optimal cost
   res = []
   for k in range(1, n):
     res.append((C[(bits, k)][0] + dists[k][0], k))
   opt, parent = min(res)
 
-  # Backtrack to find full path
   path = []
   for i in range(n - 1):
     path.append(parent)
@@ -42,7 +39,7 @@ def held_karp(dists):
     _, parent = C[(bits, parent)]
     bits = new_bits
 
-  # Add implicit start state
+  # 加入起始点
   path.append(0)
   route = list(reversed(path))
   route.append(0)
@@ -52,15 +49,17 @@ def held_karp(dists):
 
 def finalRoute(arr,dists):
   distance, route = held_karp(dists)
-  routeLocation = DataInit.read_csv_lng_lat(arr,route)
+  routeLocation, routename= DataInit.read_csv_route_lnglat(arr,route)
+  print(route)
+  return distance, routeLocation, routename
 
-  return distance, routeLocation
-
+# 测试用例
 # if __name__ == '__main__':
-#   arr = [1,16,5,15,6,0]
+#   arr = [1,18,5,15,6,0]
 #   dists = DataInit.read_csv_distance(arr)
 #   for row in dists:
 #     print(''.join([str(n).rjust(4, ' ') for n in row]))
 #   distance, route = held_karp(dists)
 #   print(distance)
 #   print(route)
+#   simulated_annealing.finalRoute(arr,pd.DataFrame(dists))

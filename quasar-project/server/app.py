@@ -8,6 +8,7 @@ import sys
 import pandas as pd
 import held_karp
 import DataInit
+import simulated_annealing
 
 # 配置参数,开启debug模式,json转换中文不使用unicode
 DEBUG = True
@@ -22,24 +23,35 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # 也可以简单直接写CORS(app)
 
 # 配置路由
-@app.route('/PostMap', methods=['GET', 'POST'])
-
-def all_map():
+@app.route('/PostMap', methods=['POST'])
+def get_route():
     distance = 0
     routeLocation = []
+    routeName = []
     response_object = {'status': 'success'}
-    if request.method == 'POST':
-      arr = request.get_json()['arr']
-      print(arr)
-      dists = DataInit.read_csv_distance(arr)
-      print(dists)
-      distance, routeLocation = held_karp.finalRoute(arr,dists)
-      response_object['Distance'] = json.dumps(int(distance))
-      response_object['RouteLocation'] = routeLocation
-      print(distance)
-      print(routeLocation)
+    arr = request.get_json()['arr']
+    print(arr)
+    dists = DataInit.read_csv_distance(arr)
+    print(dists)
+    if(len(arr) < 15):
+      distance, routeLocation, routeName = held_karp.finalRoute(arr, pd.DataFrame(dists))
+    else:
+      distance, routeLocation, routeName = simulated_annealing.finalRoute(arr,pd.DataFrame(dists))
+    response_object['Distance'] = json.dumps(int(distance))
+    response_object['RouteLocation'] = routeLocation
+    response_object['RouteName'] = routeName
+    print(distance)
+    print(routeLocation)
+    print(routeName)
     return jsonify(response_object)
 
+@app.route('/GetMap', methods=['GET'])
+def get_map_position():
+  return jsonify({
+    'status': 'success',
+    'Position': DataInit.read_csv_all_lnglat()
+  })
+
 if __name__ == "__main__":
-    app.run(host='10.27.112.2',port=5000,debug=True)
+    app.run()
 

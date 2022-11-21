@@ -76,13 +76,7 @@
             <q-item-section> 设置 </q-item-section>
           </q-item>
 
-          <q-item to="/help" exact clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="help" />
-            </q-item-section>
 
-            <q-item-section> 帮助 </q-item-section>
-          </q-item>
         </q-list>
       </q-drawer>
 

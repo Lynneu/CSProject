@@ -68,15 +68,39 @@ export default {
       newTask: '',
       tasks: [
         {
-          title: '写数据结构课设',
-          done: false,
-        },
-        {
           title: 'Linux内存管理',
           done: false,
         },
         {
+          title: '计控实验',
+          done: false,
+        },
+        {
+          title: '计算机系统结构实验',
+          done: false,
+        },
+        {
+          title: '汽车文化作业',
+          done: false,
+        },
+        {
+          title: '六级听力',
+          done: false,
+        },
+        {
+          title: '党校考试',
+          done: false,
+        },
+        {
+          title: '计控实验',
+          done: false,
+        },
+        {
           title: '算法作业背包问题',
+          done: true,
+        },
+        {
+          title: '数据结构课设报告提交',
           done: true,
         },
       ],
