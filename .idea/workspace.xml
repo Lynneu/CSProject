@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9bff8b7f-71ee-4ae4-ac25-ca66fa4c513d" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/quasar-project/server/simulated_annealing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/server/DataInit.py" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/server/DataInit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/server/LocationData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/server/LocationData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/server/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/server/held_karp.py" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/server/held_karp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/src/layouts/MainLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/src/layouts/MainLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/src/pages/SettingsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/src/pages/SettingsPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/src/pages/TodoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/src/pages/TodoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quasar-project/src/pages/schoolMap.vue" beforeDir="false" afterPath="$PROJECT_DIR$/quasar-project/src/pages/schoolMap.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +31,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/PYCODE/DataStructureProject",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "last_opened_file_path": "D:/PYCODE/practice",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
